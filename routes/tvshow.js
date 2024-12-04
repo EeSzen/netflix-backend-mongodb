@@ -11,13 +11,13 @@ router.get("/", async (req, res) => {
 
   let filter = {};
 
-  if(genre){
+  if (genre) {
     filter.genre = genre;
   }
-  if(rating){
+  if (rating) {
     filter.rating = { $gt: rating };
   }
-  if(premiere_year){
+  if (premiere_year) {
     filter.premiere_year = { $gt: premiere_year };
   }
 
@@ -28,7 +28,11 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
   const tvshow = await Tvshow.findById(id);
-  res.send(tvshow);
+  if (tvshow) {
+    res.status(200).send(tvshow);
+  } else {
+    res.status(404).send("Tv show not found");
+  }
 });
 
 module.exports = router;
