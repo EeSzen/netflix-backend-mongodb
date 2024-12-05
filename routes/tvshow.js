@@ -41,17 +41,9 @@ router.post("/", async (req, res) => {
     const rating = req.body.rating;
 
     // check for error
-    if (
-      !title ||
-      !creator ||
-      !premiere_year ||
-      !end_year ||
-      !seasons ||
-      !genre ||
-      !rating
-    ) {
+    if (!title || !creator || !premiere_year || !seasons || !genre || !rating) {
       return res.status(400).send({
-        error: error._message,
+        error: "Please check is everything is filled in",
       });
     }
 
@@ -67,7 +59,7 @@ router.post("/", async (req, res) => {
     res.status(200).send(newTvshow);
   } catch (error) {
     res.status(400).send({
-      error: error._message,
+      error: "Please check is everything is filled in",
     });
   }
 });
